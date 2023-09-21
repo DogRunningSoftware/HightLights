@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('temas', function (Blueprint $table) {
-            $table->id('ide_tem');
+            $table->bigIncrements('ide_tem');
+            $table->unsignedBigInteger('ide_usu');
             $table->foreign('ide_usu')->references('ide_usu')->on('usuarios');
             $table->string('con_tem',280);
             $table->string('sub_tem',280);

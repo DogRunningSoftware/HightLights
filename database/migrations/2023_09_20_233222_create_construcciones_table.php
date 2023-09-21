@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('construcciones', function (Blueprint $table) {
-            $table->id('ide_con');
+            $table->bigIncrements('ide_con');
+            $table->unsignedBigInteger('ide_usu');
             $table->foreign('ide_usu')->references('ide_usu')->on('usuarios');
             $table->string('fot1_con',250);
             $table->string('fot2_con',250);

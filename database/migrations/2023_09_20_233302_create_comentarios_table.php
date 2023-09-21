@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comentarios', function (Blueprint $table) {
-            $table->id('ide_com');
+            $table->bigIncrements('ide_com');
+            $table->unsignedBigInteger('ide_usu');
+            $table->unsignedBigInteger('ide_con');
+            $table->unsignedBigInteger('idx_com');
             $table->foreign('ide_usu')->references('ide_usu')->on('usuarios');
-            $table->foreign('ide_con')->references('ide_con')->on('contrucciones');
+            $table->foreign('ide_con')->references('ide_con')->on('construcciones');
             $table->foreign('idx_com')->references('ide_com')->on('comentarios');
             $table->string('con_com',280);
             $table->string('sub_tem',280);
