@@ -11,8 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('construccions', function (Blueprint $table) {
-            $table->id();
+        Schema::create('construcciones', function (Blueprint $table) {
+            $table->id('ide_con');
+            $table->foreign('ide_usu')->references('ide_usu')->on('usuarios');
+            $table->string('fot1_con',250);
+            $table->string('fot2_con',250);
+            $table->string('fot3_con',250);
+            $table->string('con_con',100);
+            $table->string('txt_con',280);
+            $table->integer('lik_con');
+            $table->integer('vis_con');
+            $table->integer('des_con');
+            $table->boolean('est_con');
             $table->timestamps();
         });
     }
