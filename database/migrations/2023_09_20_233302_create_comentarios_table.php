@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('ide_usu');
             $table->unsignedBigInteger('ide_con');
             $table->unsignedBigInteger('idx_com');
-            $table->foreign('ide_usu')->references('ide_usu')->on('usuarios');
+            $table->foreign('ide_usu')->references('ide_usu')->on('users');
             $table->foreign('ide_con')->references('ide_con')->on('construcciones');
             $table->foreign('idx_com')->references('ide_com')->on('comentarios');
             $table->string('con_com',280);
