@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="">
     <style>/* Estilos globales */
 body {
     font-family: Arial, sans-serif;
@@ -126,14 +126,14 @@ footer {
     </header>
     <nav>
         <ul>
-            <li><a href="#">Inicio</a></li>
+            <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="#">Proyectos</a></li>
             <li><a href="#">Contacto</a></li>
         </ul>
     </nav>
     <section class="register">
         <h2>Registro de Usuario</h2>
-        <form action="{{ route('register') }}" method="POST">
+        <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
         @csrf
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
@@ -175,11 +175,9 @@ footer {
             </div>
             <div class="form-group">
                 <label for="foto">Cargar Foto:</label>
-                <input type="hidden" id="foto" name="fot_usu" value="a">
-                @error('fot_usu')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                <input type="file" id="foto" name="fot_usu" accept="image/*">
+                @error('fot_mas')
+                        <p class="error-message">{{ $message }}</p>
                 @enderror
             </div>
             <div class="form-group">

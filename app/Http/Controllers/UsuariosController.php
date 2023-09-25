@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuarios;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 class UsuariosController extends Controller
 {
     /**
@@ -50,16 +51,37 @@ class UsuariosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuarios $usuarios)
+    public function updateN(Request $request)
     {
-        //
+        $ide_usu = auth()->user()->id;
+        $user =User::findOrFail($ide_usu);
+        $user->name = $request->nom_usu;
+        $user->save();
+        return view('home'); 
+        
+    }
+    public function updateP(Request $request)
+    {
+        $ide_usu = auth()->user()->id;
+        $user =User::findOrFail($ide_usu);
+        Storage::delete($user->fot_usu);
+        $user->fot_usu = Storage::url($request->file('fot_usu')->store('public/image'));
+        $user->save();
+        session(['fot_usu' => $user->fot_usu]);
+        return view('home'); 
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuarios $usuarios)
+    public function destroy()
     {
-        //
+        $ide_usu = auth()->user()->id;
+        $user =User::findOrFail($ide_usu);
+        $user->est_usu = "Inactivo";
+        $user->save();
+        auth()->logout($user);
+        return view('index'); 
     }
 }

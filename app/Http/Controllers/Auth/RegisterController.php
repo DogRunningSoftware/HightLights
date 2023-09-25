@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class RegisterController extends Controller
 {
@@ -53,8 +55,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'fot_usu' => ['required', 'string'],
             'est_usu' => ['required', 'string'],
+            'fot_usu' => ['required','image','max:250']
         ]);
     }
 
@@ -70,8 +72,16 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'fot_usu' => $data['fot_usu'],
-            'est_usu' => $data['est_usu']
+            'est_usu' => $data['est_usu'],
+            'fot_usu' => Storage::url($data['fot_usu']->store('public/image')),
         ]);
+    }
+    protected function delete($ide_usu)
+    {
+        $user =User::findOrFail($ide_usu);
+        $user->est_usu = "Inactivo";
+        $user->save();
+
+        
     }
 }

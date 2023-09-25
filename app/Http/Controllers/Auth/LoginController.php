@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -36,5 +38,28 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    public function isActive(Request $request)
+    {
+        $email = $request->input('email');
+        $usuario = User::where('email', $email)->first();
+        if ($usuario) {
+            if ($usuario->est_usu=="Inactivo"){
+                return "Esta cuenta esta inactiva";
+            } 
+            else{
+                $fot_usu=$usuario->fot_usu;
+                auth()->login($usuario);
+                session(['fot_usu' => $fot_usu]);
+                return view('home'); 
+       
+            }
+        }
+        else{
+            return "Usuario no encontrado";
+
+        }
+
+
     }
 }
