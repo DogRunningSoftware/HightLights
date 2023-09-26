@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('ide_con');
             $table->unsignedBigInteger('ide_usu');
             $table->foreign('ide_usu')->references('id')->on('users');
+            $table->string('nom_con',50);
             $table->string('fot1_con',250);
             $table->string('fot2_con',250);
             $table->string('fot3_con',250);

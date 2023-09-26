@@ -52,11 +52,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'est_usu' => ['required', 'string'],
-            'fot_usu' => ['required','image','max:250']
+            'fot_usu' => ['required','max:250']
         ]);
     }
 
@@ -73,8 +73,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'est_usu' => $data['est_usu'],
-            'fot_usu' => Storage::url($data['fot_usu']->store('public/image')),
+            'fot_usu' => $data['fot_usu']
         ]);
+
+
     }
     protected function delete($ide_usu)
     {

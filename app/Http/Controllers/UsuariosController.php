@@ -53,6 +53,9 @@ class UsuariosController extends Controller
      */
     public function updateN(Request $request)
     {
+        $request->validate([
+            'nom_usu' => 'required|max:255|unique:users'
+        ]);
         $ide_usu = auth()->user()->id;
         $user =User::findOrFail($ide_usu);
         $user->name = $request->nom_usu;
@@ -62,10 +65,13 @@ class UsuariosController extends Controller
     }
     public function updateP(Request $request)
     {
+        $request->validate([
+            'fot_usu' => 'required|image|max:250'
+        ]);
         $ide_usu = auth()->user()->id;
         $user =User::findOrFail($ide_usu);
         Storage::delete($user->fot_usu);
-        $user->fot_usu = Storage::url($request->file('fot_usu')->store('public/image'));
+        $user->fot_usu = Storage::url($request->file('fot_usu')->store('public/image/users'));
         $user->save();
         session(['fot_usu' => $user->fot_usu]);
         return view('home'); 

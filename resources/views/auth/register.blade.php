@@ -127,8 +127,17 @@ footer {
     <nav>
         <ul>
             <li><a href="{{ url('/') }}">Inicio</a></li>
-            <li><a href="#">Proyectos</a></li>
+            <li><a href="{{ route('construcciones.home')}}">Proyectos</a></li>
             <li><a href="#">Contacto</a></li>
+            @if (Route::has('login'))
+                @auth
+                    <li><a href="{{ url('/home') }}">Home</a></li>
+                @else
+                    <li><a href="{{ route('login') }}">Log in</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
+
+                @endauth
+            @endif
         </ul>
     </nav>
     <section class="register">
@@ -174,11 +183,8 @@ footer {
                 @enderror
             </div>
             <div class="form-group">
-                <label for="foto">Cargar Foto:</label>
-                <input type="file" id="foto" name="fot_usu" accept="image/*">
-                @error('fot_mas')
-                        <p class="error-message">{{ $message }}</p>
-                @enderror
+                <input type="hidden" id="foto" name="fot_usu" value="/storage/image/default.jpg">
+        
             </div>
             <div class="form-group">
                 <input type="hidden"  name="est_usu" value="Activo">

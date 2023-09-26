@@ -20,7 +20,7 @@ class ConstruccionController extends Controller
      */
     public function create()
     {
-        //
+        return view('construcciones.create_constructions'); 
     }
 
     /**
@@ -34,9 +34,9 @@ class ConstruccionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Construccion $construccion)
+    public function show()
     {
-        //
+        return view('construcciones.home_constructions'); 
     }
 
     /**

@@ -50,7 +50,6 @@ class LoginController extends Controller
             else{
                 $fot_usu=$usuario->fot_usu;
                 auth()->login($usuario);
-                session(['fot_usu' => $fot_usu]);
                 return view('home'); 
        
             }

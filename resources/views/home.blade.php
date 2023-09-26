@@ -89,14 +89,14 @@
     <nav>
         <ul>
             <li><a href="/">Inicio</a></li>
-            <li><a href="#">Proyects</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{{ route('construcciones.home')}}">Proyectos</a></li>
+            <li><a href="#">Contacto</a></li>
             <li><a href="/home">Home</a></li>
         </ul>
     </nav>
     <section class="home">
         <aside class="profile">
-        <img  id="profile-image" src="{{asset(session('fot_usu'))}}" alt="Foto de perfil">
+        <img  id="profile-image" src="{{ Auth::user()->fot_usu }}" alt="Foto de perfil">
         </form>
             <form  method="POST" action="{{ route('user.updateN')}}">
             @csrf
@@ -105,7 +105,7 @@
         </form>
         <form  method="POST" action="{{ route('user.updateP')}}" enctype="multipart/form-data">
             @csrf
-            <input type="file" name="fot_usu"></input>
+            <input type="file" name="fot_usu" accept="image/*" required></input>
             <button type="submit" >Actualizar foto</button>
         </form>
             <div class="dropdown">
@@ -126,6 +126,7 @@
                 </div>
             </div>
         </aside>
+        <a href="{{ route('construcciones.create')}}">Nueva construccion</a>
         <div class="content">
             <h2>Bienvenido de nuevo,{{ Auth::user()->name }} </h2>
             <!-- Contenido de la página de inicio aquí -->
