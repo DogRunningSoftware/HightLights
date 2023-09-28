@@ -89,6 +89,14 @@
                 <img id="" src="{{ asset($con1->fot1_con) }}" alt="" style="width: 100px; height: 100px;">
                 <h3><a href="{{ route('construcciones.down', $con1->con_con) }}">Descargar</a></h3>
                 <h1>Tamaño del archivo: {{ Storage::size('/public/' . $con1->con_con) }} bytes</h1>
+                <form  method="GET" action="{{ route('construcciones.delete', $con1->ide_con)}}">
+                    @csrf
+                    <button type="submit" >Eliminar</button>
+                </form>
+                <form  method="GET" action="{{ route('construcciones.edit', $con1->ide_con)}}">
+                    @csrf
+                    <button type="submit" >Actualizar</button>
+                </form>
             </div>
             @endforeach
         </div>

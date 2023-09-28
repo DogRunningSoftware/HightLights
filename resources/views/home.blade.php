@@ -127,6 +127,7 @@
             </div>
         </aside>
         <a href="{{ route('construcciones.create')}}">Nueva construccion</a>
+        <a href="{{ route('construcciones.mine')}}">Mis construcciones</a>
         <div class="content">
             <h2>Bienvenido de nuevo,{{ Auth::user()->name }} </h2>
             <!-- Contenido de la página de inicio aquí -->

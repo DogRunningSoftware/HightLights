@@ -35,6 +35,10 @@ Route::get('/construcciones', [ConstruccionController::class, 'show'])->name('co
 Route::post('/construcciones/store', [ConstruccionController::class, 'store'])->name('construcciones.store');
 Route::get('/construcciones/crear', [ConstruccionController::class, 'create'])->middleware(['auth','verified'])->name('construcciones.create');
 Route::get('/storage/{con_con}', [ConstruccionController::class, 'down'])->name('construcciones.down');
+Route::get('/construcciones/mines', [ConstruccionController::class, 'mine'])->middleware(['auth','verified'])->name('construcciones.mine');
+Route::get('/construcciones/delete/{ide_con}', [ConstruccionController::class, 'delete'])->middleware(['auth','verified'])->name('construcciones.delete');
+Route::get('/construcciones/edit/{ide_con}', [ConstruccionController::class, 'edit'])->middleware(['auth','verified'])->name('construcciones.edit');
+Route::post('/construcciones/update', [ConstruccionController::class, 'update'])->middleware(['auth','verified'])->name('construcciones.update');
 
 Auth::routes(['verify' => true]);
 

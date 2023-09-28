@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Construcciones extends Model
 {
+    protected $table = "construcciones";
+    protected $primaryKey = "ide_con";
+    protected $hidden = ['ide_con'];
     protected $fillable = [
         'nom_con',
         'fot1_con',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Construcciones;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -78,25 +79,57 @@ class ConstruccionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Construcciones $construccion)
+    public function edit($ide_con)
     {
-        //
+        $con = Construcciones::findOrFail($ide_con);
+        return view('construcciones.update_constructions',['con' => $con]); 
+
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Construcciones $construccion)
+    public function update(Request $request)
     {
-        //
+        $con = Construcciones::findOrFail((int)$request->ide_con);
+        if($request->file('fot1_con')!=null && $request->file('fot3_con')!=null && $request->file('fot3_con')!=null && $request->file('con_con')!=null ){
+            $fot1_con= Storage::url($request->file('fot1_con')->store('public/image/constructions'));
+            $fot2_con= Storage::url($request->file('fot2_con')->store('public/image/constructions'));
+            $fot3_con= Storage::url($request->file('fot3_con')->store('public/image/constructions'));
+            $con_con= Storage::url($request->file('con_con')->store('public/data/constructions'));
+            $con->fot1_con = $fot1_con;
+            $con->fot2_con = $fot2_con;
+            $con->fot3_con = $fot3_con;
+            $con->con_con = substr($con_con,8);
+
+        }
+        $con->nom_con = $request->nom_con;
+        $con->est_con = $request->est_con;
+        $con->txt_con = $request->txt_con;
+        $con->lik_con =  (int) $request->lik_con;
+        $con->des_con =  (int) $request->des_con;
+        $con->vis_con =  (int) $request->vis_con;
+        $con->save();
+        return redirect()->action([ConstruccionController::class, 'mine']);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Construcciones $construccion)
+    public function delete($ide_con)
     {
-        //
+        $con =Construcciones::findOrFail($ide_con);
+        $con->est_con = "Inactiva";
+        $con->save();
+        return redirect()->action([ConstruccionController::class, 'mine']);
+
+    }
+    public function mine()
+    {
+        $con = Construcciones::where('est_con', 'Activa')->Where('ide_usu',auth()->user()->id)->get();
+        return view('construcciones.mines_constructions',['con' => $con]); 
     }
     public function down($con_con){
 
