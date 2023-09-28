@@ -59,7 +59,7 @@
     <nav>
         <ul>
             <li><a href="/">Inicio</a></li>
-            <li><a href="#">Proyectos</a></li>
+            <li><a href="{{ route('construcciones.home')}}">Proyectos</a></li>
             <li><a href="#">Contacto</a></li>
             <li><a href="{{ url('/home') }}">Home</a></li>
         </ul>
@@ -67,32 +67,57 @@
     <section class="subir-construccion">
         <div class="formulario-subir">
             <h2>Subir una Construcción</h2>
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('construcciones.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                    <label for="nombre">Nombre de la Construcción</label>
+                    <input type="text" id="nom_con" name="nom_con" required>
+                    @error('nom_con')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
 
-                <label for="nombre">Nombre de la Construcción</label>
-                <input type="text" id="nombre" name="nombre" required>
+                    <label >Foto 1</label>
+                    <input type="file" id="foto1" name="fot1_con" accept="image/*" required>
+                    @error('fot1_con')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
 
-                <label for="foto1">Foto 1</label>
-                <input type="file" id="foto1" name="foto1" accept="image/*" required>
+                    <label >Foto 2</label>
+                    <input type="file" id="foto2" name="fot2_con" accept="image/*" required>
+                    @error('fot2_con')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                    <label>Foto 3</label>
 
-                <label for="foto2">Foto 2</label>
-                <input type="file" id="foto2" name="foto2" accept="image/*" value=" ">
+                    <input type="file" id="foto3" name="fot3_con" accept="image/*" required>
+                    @error('fot3_con')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+               
+                    <label for="archivo">Archivo de la Construcción</label>
+                    <input type="file" id="archivo" name="con_con" accept=".zip, .rar" required>
+                    @error('con_con')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
 
-                <label for="foto3">Foto 3</label>
-                <input type="file" id="foto3" name="foto3" accept="image/*" value=" ">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="txt_con" rows="4" required></textarea>
 
-                <label for="archivo">Archivo de la Construcción</label>
-                <input type="file" id="archivo" name="archivo" accept=".zip, .rar" required>
+                    <input type="hidden" id="likes" name="lik_con" value="0">
+                    <input type="hidden" id="visitas" name="vis_con" value="0">
+                    <input type="hidden" id="descargas" name="des_con" value="0">
+                    <input type="hidden"  name="est_con" value="Activa">
 
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
-
-                <input type="hidden" id="likes" name="likes" value="0">
-                <input type="hidden" id="visitas" name="visitas" value="0">
-                <input type="hidden" id="descargas" name="descargas" value="0">
-
-                <button type="submit">Subir Construcción</button>
+                    <button type="submit">Subir Construcción</button>
             </form>
         </div>
 

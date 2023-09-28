@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('lik_con');
             $table->integer('vis_con');
             $table->integer('des_con');
-            $table->boolean('est_con');
+            $table->String('est_con',8);
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('lik_tem');
             $table->integer('com_tem');
             $table->integer('vis_tem');
-            $table->boolean('est_tem');
+            $table->String('est_tem',8);
             $table->timestamps();
         });
     }

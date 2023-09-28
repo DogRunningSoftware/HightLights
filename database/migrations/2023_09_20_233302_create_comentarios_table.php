@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('sub_tem',280);
             $table->integer('lik_com');
             $table->integer('com_com');
-            $table->boolean('est_com');
+            $table->String('est_com',8);
             $table->timestamps();
         });
     }

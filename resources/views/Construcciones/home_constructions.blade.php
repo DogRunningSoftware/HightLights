@@ -77,12 +77,16 @@
     <section class="construcciones">
         <div class="construcciones-list">
             <h2>Construcciones</h2>
-          
+            @foreach($con as $con1)
             <div class="construccion">
                 <h3><a href=""></a></h3>
-                <p>Descripción: </p>
-                <p>Fecha de Creación: </p>
+                
+                <a>Nombre: {{ $con1->nom_con }}</a>
+                <p>Descripción:{{ $con1->txt_con }} </p>
+                <img id="" src="{{ asset($con1->fot1_con) }}" alt="" style="width: 100px; height: 100px;">
+                <h3><a href="{{ route('construcciones.down', $con1->con_con) }}">Descargar</a></h3>
             </div>
+            @endforeach
         </div>
     </section>
     <footer>
